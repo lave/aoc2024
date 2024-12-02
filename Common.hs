@@ -1,11 +1,18 @@
 module Common where
 import qualified Data.Set
 import qualified Data.Either
+import qualified System.Environment
+import Text.Parsec
 
 readSingleLineFile filename = do
-    content <- readFile filename
+    args <- System.Environment.getArgs
+    content <- readFile $ head args
     let [line] = lines content
     return line
+
+readContent = do
+    args <- System.Environment.getArgs
+    readFile $ head args
 
 readInt s = read s :: Int
 
@@ -39,3 +46,5 @@ trd3 (_, _, z) = z
 
 fromLeft_ = Data.Either.fromLeft undefined
 fromRight_ = Data.Either.fromRight undefined
+
+--int_p = readInt <$> (many $ oneOf "0123456789")

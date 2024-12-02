@@ -7,7 +7,7 @@ INPUT_FILE=${2:-${SRC_FILE%%.hs}.input}
 
 if [ "$SRC_FILE" -nt "$BIN_FILE" ]; then
     echo Compiling...
-    ghc -Wno-x-partial "$SRC_FILE"
+    ghc -Wno-x-partial "$SRC_FILE" || { exit 1; }
     rm "$OBJ_FILE"
 fi
 

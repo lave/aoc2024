@@ -1,20 +1,19 @@
 import Data.List
+import Text.Parsec
 
 import Common
 
 main = do
-    content <- readFile "01.input"
-    let pairs = parse content
-    let lists = (map fst pairs, map snd pairs)
+    content <- readContent
+    let Right lists = parse_ content
     putStrLn $ show $ solve1 lists
     putStrLn $ show $ solve2 lists
 
-
-parse = map (head . parseLine) . lines
+parse_ content = parse p "" content
     where
-        parseLine s = [(n1, n2) |
-                (n1, s1) <- readsInt s,
-                (n2, "") <- readsInt s1]
+        p = (\[x, y] -> (x, y)) <$> transpose <$> line_p `endBy` newline <* eof
+        line_p = int_p `sepBy` (many1 $ char ' ')
+        int_p = readInt <$> (many $ oneOf "0123456789")
 
 solve1 (l1, l2) = sum $ map abs diffs
     where
