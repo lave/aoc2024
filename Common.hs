@@ -48,3 +48,6 @@ fromLeft_ = Data.Either.fromLeft undefined
 fromRight_ = Data.Either.fromRight undefined
 
 --int_p = readInt <$> (many $ oneOf "0123456789")
+
+with_remainder p = (,) <$> p <*> getInput
+
