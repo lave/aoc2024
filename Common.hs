@@ -1,4 +1,6 @@
 module Common where
+
+import qualified Data.Array
 import qualified Data.Set
 import qualified Data.Either
 import qualified System.Environment
@@ -51,3 +53,12 @@ fromRight_ = Data.Either.fromRight undefined
 
 with_remainder p = (,) <$> p <*> getInput
 
+toArray ls = Data.Array.listArray ((0, 0), (w-1, h-1)) (concat ls)
+    where
+        h = length ls
+        w = length $ head ls
+
+bounds0 m = (w+1, h+1)
+    where
+        ((0, 0), (w, h)) = Data.Array.bounds m
+        
