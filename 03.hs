@@ -1,6 +1,4 @@
-import Data.List
 import Text.Parsec
-import Debug.Trace
 
 import Common
 

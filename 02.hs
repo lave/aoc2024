@@ -1,4 +1,3 @@
-import Data.List
 import Text.Parsec
 
 import Common

@@ -1,8 +1,6 @@
 import Data.Array
-import Data.List
 import qualified Data.Set as Set
 import Text.Parsec
-import Debug.Trace
 
 import Common
 
@@ -48,7 +46,7 @@ walk map pos dir = walk' map pos dir (speed dir) Set.empty
                 obstacle = map ! pos' == '#'
                 visited' = Set.insert (x, y, dir) visited
 
-solve1 map start = length $ Set.map (\(x, y, dir) -> (x, y)) visited
+solve1 map start = length $ Set.map (\(x, y, _) -> (x, y)) visited
     where
         (visited, False) = walk map start North
 
