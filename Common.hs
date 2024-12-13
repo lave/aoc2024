@@ -1,6 +1,7 @@
 module Common where
 
 import qualified Data.Array
+import qualified Data.Char
 import qualified Data.Set
 import qualified Data.Either
 import qualified System.Environment
@@ -25,6 +26,8 @@ readsStr s = reads s :: [(String, String)]
 readsChar [] = []
 readsChar (' ' : s) = readsChar s
 readsChar (c : s) = [(c, s)]
+
+charToInt c = Data.Char.ord c - Data.Char.ord '0'
 
 maybeDo r s =
     case res of
@@ -62,4 +65,3 @@ toArray ls = Data.Array.listArray ((0, 0), (w-1, h-1)) (concat ls)
 bounds0 m = (w+1, h+1)
     where
         ((0, 0), (w, h)) = Data.Array.bounds m
-        
